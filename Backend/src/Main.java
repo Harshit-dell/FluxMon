@@ -1,0 +1,77 @@
+import java.io.*;
+import java.nio.Buffer;
+import java.nio.file.*;
+import java.time.format.TextStyle;
+import java.util.*;
+
+import static java.util.Locale.filter;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) throws Exception{
+        terminalLineValue TotalLines=totalTerminalLine();
+        if(!TotalLines.isTerminal){
+            return;
+        }
+        clearTreminalScreen();
+        getStreamValue(TotalLines.lines);
+    }
+    public static  void clearTreminalScreen() throws InterruptedException, IOException {
+    ProcessBuilder builder=new ProcessBuilder("bash","-c","clear");
+    Process p=builder.start();
+    p.waitFor();
+    }
+    public static terminalLineValue totalTerminalLine() {
+        try {
+            Process process = new ProcessBuilder("bash","-c","stty size < /dev/tty").start();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))){
+                String line = reader.readLine();
+                process.waitFor();
+                if (line != null) {
+                    String [] value=line.split(" ");
+                    int length=Integer.parseInt(value[0]);
+                    return new terminalLineValue(true,length);
+                } else {
+                    System.out.println(
+                            "\033[1;37;41m" +
+                                    "  NO TERMINAL DETECTED  \n" +
+                                    "  AVOID IDE TERMINAL    " +
+                                    "\033[0m"
+                    );
+                    return new terminalLineValue(false);
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return  null;
+    }
+    public static void getStreamValue(int totalLine){
+
+    try{
+        Files.list(Path.of("/proc"))
+                .map(path->path.getFileName().toString())
+                .filter(name->name.matches("\\d+"))
+                .map(Integer::parseInt)
+                .sorted()
+                .limit(totalLine)
+                .forEach( pid ->{
+                    try{
+                        Path path=Path.of("/proc/" + pid + "/comm");
+                        String content=Files.readString(path);
+                        System.out.print(pid+"->"+content);
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
+                });
+    }
+        catch (Exception e){
+        System.out.println(e.getMessage());
+    }
+
+    }
+}

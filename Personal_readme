@@ -1,0 +1,13 @@
+Version1
+    CORE logic of project.
+
+    Used WatcherService in /proc but failed because watcherService work on initofy,i.e. Kernal sending message
+    that file created,deleted(IN_CREATED).But /proc is virtual File System.
+
+-failed
+
+Version2
+    ~It is dynamiclly changed so
+    print the process that can fit on one screen
+        -stty size work best to get layout
+        -this will be basic of scrolling
