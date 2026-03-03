@@ -11,3 +11,6 @@ Version2
     print the process that can fit on one screen
         -stty size work best to get layout
         -this will be basic of scrolling
+
+        1.Added memory mapping
+        2.leaving refresh static for ease
