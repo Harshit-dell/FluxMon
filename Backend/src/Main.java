@@ -3,90 +3,70 @@ import java.nio.Buffer;
 import java.nio.file.*;
 import java.time.format.TextStyle;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.util.Locale.filter;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    public static AtomicBoolean running =new AtomicBoolean(true);
+
     public static void main(String[] args) throws Exception{
-        terminalLineValue TotalLines=totalTerminalLine();
+        start();
+    }
+    public  static void start() throws Exception {
+        terminalLineValue TotalLines=cosmetics.totalTerminalLine();
         if(!TotalLines.isTerminal){
             return;
         }
-        clearTreminalScreen();
-        getStreamValue(TotalLines.lines);
+        enterAlternateBuffer();
+        startInputListner(TotalLines);
     }
-    public static void getStreamValue(int totalLine){
-        try{
-            Files.list(Path.of("/proc"))
-                    .map(path->path.getFileName().toString())
-                    .filter(name->name.matches("\\d+"))
-                    .map(Integer::parseInt)
-                    .sorted()
-                    .forEach( pid ->{
-                        try{
-                            Path path=Path.of("/proc/" + pid + "/comm");
-                            String content=Files.readString(path).trim();
-                            System.out.print(pid+"->"+content+"--->");
-                            getMemoryMap(pid);
-                        }
-                        catch (Exception e){
-                            System.out.println(e.getMessage());
-                        }
-                    });
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+    public static void enterAlternateBuffer() throws Exception{
+        System.out.print("\033[?1049h");
+        System.out.print("\033[?25l");
+        Runtime.getRuntime()
+                .exec(new String[]{"sh","-c","stty -icanon -echo < /dev/tty"})
+                .waitFor();
+        System.out.flush();
     }
+    public  static void exitAlternateBuffer() throws IOException, InterruptedException {
+        System.out.print("\033[?1049l");
+        System.out.print("\033[?25h");
+        Runtime.getRuntime().exec(new String[]{"sh","-c","stty sane < /dev/tty"}).waitFor();
+        System.out.flush();
+    }
+    public static void startInputListner(terminalLineValue TotalLines){
 
-    public static  void clearTreminalScreen() throws InterruptedException, IOException {
-    ProcessBuilder builder=new ProcessBuilder("bash","-c","clear");
-    Process p=builder.start();
-    p.waitFor();
-    }
-    public static terminalLineValue totalTerminalLine() {
-        try {
-            Process process = new ProcessBuilder("bash","-c","stty size < /dev/tty").start();
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))){
-                String line = reader.readLine();
-                process.waitFor();
-                if (line != null) {
-                    String [] value=line.split(" ");
-                    int length=Integer.parseInt(value[0]);
-                    return new terminalLineValue(true,length);
-                } else {
-                    System.out.println(
-                            "\033[1;37;41m" +
-                                    "  NO TERMINAL DETECTED  \n" +
-                                    "  AVOID IDE TERMINAL    " +
-                                    "\033[0m"
-                    );
-                    return new terminalLineValue(false);
-                }
+        Thread listner=new Thread(() ->{
+            try{
+                Resources.getStreamValue(TotalLines.lines-2);
+                // check constantly if user pressed the key . if pressed q that exit
+                    System.out.print("Press q to exit:");
+                    while(running.get()){
+                        if(System.in.available()>0){
+                        //this checking was using too much memory or cpu something
+                            //that my laptop fan ran on max speed added sleep to cope
+                            var answer=System.in.read();
+                            if(answer=='q'){
+                                running.set(false);
+                            }
+                        }
+                        Thread.sleep(100);
+                    }
+                exitAlternateBuffer();
+                //exiting here is risking i think if any bug happens here user
+                //stuck in the echo and canonical mode and alter Buffer mode nigga
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
             }
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return  null;
-    }
-    public static void getMemoryMap(Integer pid) {
-        Path path = Path.of("/proc/" + pid + "/status");
-        try {
-            String content = Files.readString(path);
-            for (String line : content.split("\n")) {
-                String[] parts = line.split("\\s+");
-                if (parts[0].equals("VmRSS:")) {
-                    System.out.println(parts[1] + " kB");
-                    return;
-                }
-            }
-            System.out.println("Kernal Thread");
+        });
+        listner.start();
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
     }
+
 }
