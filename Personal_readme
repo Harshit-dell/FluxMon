@@ -15,3 +15,5 @@ Version2
         1.Added memory mapping
         2.leaving refresh static for ease
         3.working on the raw terminal
+        4.Adding more information in the screen and beautifing it(tommorow)
+
