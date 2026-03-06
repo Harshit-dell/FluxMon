@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 public class cosmetics {
     public static terminalLineValue totalTerminalLine() {
@@ -19,10 +20,10 @@ public class cosmetics {
                                     "  AVOID IDE TERMINAL    " +
                                     "\033[0m"
                     );
+
                     return new terminalLineValue(false);
                 }
             }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

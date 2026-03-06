@@ -16,6 +16,8 @@ public class Main {
         start();
     }
     public  static void start() throws Exception {
+        //annot read field "isTerminal" because "TotalLines" is null Window issue
+        //but git hash fall in the IDE terminal issu why?
         terminalLineValue TotalLines=cosmetics.totalTerminalLine();
         if(!TotalLines.isTerminal){
             return;
