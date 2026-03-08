@@ -83,8 +83,10 @@ public class Resources {
 
                 if(parts[0].equals("Uid:")){
                     //user
-                    //TODO here Users hashmap is not giving value after mapping all user
-                    currentpidValue.user= Users.get(parts[1]);
+                    //TODO here Users hashmap is not giving value after mapping all user -Done
+
+
+                    currentpidValue.user= Users.get(Integer.parseInt(parts[1]));
                 }
                 else if (parts[0].equals("VmRSS:")){
                     //memory
