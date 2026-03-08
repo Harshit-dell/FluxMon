@@ -1,47 +1,39 @@
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.security.KeyPair;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 public class Resources {
-    public  static final  HashMap<Integer,String> Users=new HashMap<>();
-    public static  void start(int totalLine) throws Exception {
+    private final  HashMap<Integer,String> Users=new HashMap<>();
+    public   void start() throws Exception {
         mapUser();
+        new formating().start(getPidsValues());
 
-        getStreamValue(totalLine);
     }
-    public static void  mapUser() throws  IOException{
+    public  void  mapUser() throws  IOException{
             Files.readAllLines(Path.of("/etc/passwd")).forEach(uid ->{
                 String[] line=uid.split(":");
                 int temp=Integer.parseInt(line[3]);
                    Users.put(temp,line[0]);
             });
     }
-
-
-    public static void getStreamValue(int totalLine){
+    public List<PidValues> getPidsValues(){
+        List<PidValues> pidsValuesList=new ArrayList<>();
         try{
-            final int[] count={totalLine};
-            Files.list(Path.of("/proc"))
+                Files.list(Path.of("/proc"))
                     .map(path->path.getFileName().toString())
                     .filter(name->name.matches("\\d+"))
                     .map(Integer::parseInt)
                     .sorted()
                     .forEach( pid ->{
-                        if(count[0]<=0){
-                            return;
-                        }
                         try{
                            if(isKThread(pid) ){
-                               PidValues currentPidValue = Resources.getValueMap(pid);
+                               PidValues currentPidValue = getValueMap(pid);
                                //pid
                                currentPidValue.pid=pid;
-                               formating.start(currentPidValue);
-                               count[0]--;
+                               pidsValuesList.add(currentPidValue);
                            }
                         }
                         catch (Exception e){
@@ -52,9 +44,10 @@ public class Resources {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+        return pidsValuesList;
     }
 
-    public static boolean isKThread(int pid) throws IOException {
+    public  boolean isKThread(int pid) throws IOException {
         Path path = Path.of("/proc/" + pid + "/status");
         String content = Files.readString(path);
         for (String line : content.split("\n")) {
@@ -67,7 +60,7 @@ public class Resources {
         //here optimization is possible but will leave it for later
     }
 
-    public static PidValues getValueMap(Integer pid) throws Exception {
+    public  PidValues getValueMap(Integer pid) throws Exception {
         PidValues currentpidValue=new PidValues();
         Path contentPath=Path.of("/proc/" + pid + "/comm");
         String content=Files.readString(contentPath).trim();
@@ -84,8 +77,6 @@ public class Resources {
                 if(parts[0].equals("Uid:")){
                     //user
                     //TODO here Users hashmap is not giving value after mapping all user -Done
-
-
                     currentpidValue.user= Users.get(Integer.parseInt(parts[1]));
                 }
                 else if (parts[0].equals("VmRSS:")){
@@ -103,10 +94,4 @@ public class Resources {
         }
         return new  PidValues() ;
     }
-
-
-
-
-
-
 }
