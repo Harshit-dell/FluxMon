@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) throws Exception{
         start();
     }
+
     public  static void start() throws Exception {
         terminalLineValue TotalLines=cosmetics.totalTerminalLine();
         if(!TotalLines.isTerminal){
@@ -38,10 +39,9 @@ public class Main {
         System.out.flush();
     }
     public static void startInputListner(terminalLineValue TotalLines){
-
         Thread listner=new Thread(() ->{
             try{
-                Resources.getStreamValue(TotalLines.lines-2);
+                Resources.start(TotalLines.lines-2);
                 // check constantly if user pressed the key . if pressed q that exit
                     System.out.print("Press q to exit:");
                     while(running.get()){
