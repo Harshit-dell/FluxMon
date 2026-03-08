@@ -1,3 +1,4 @@
+import javax.print.DocFlavor;
 import java.io.*;
 import java.nio.Buffer;
 import java.nio.file.*;
@@ -13,18 +14,19 @@ public class Main {
     public static AtomicBoolean running =new AtomicBoolean(true);
 
     public static void main(String[] args) throws Exception{
-        start();
+        new Main().start();
     }
 
-    public  static void start() throws Exception {
-        terminalLineValue TotalLines=cosmetics.totalTerminalLine();
+    public void start() throws Exception {
+        cosmetics cosmetics1=new cosmetics();
+        terminalLineValue TotalLines=cosmetics1.totalTerminalLine();
         if(!TotalLines.isTerminal){
             return;
         }
         enterAlternateBuffer();
-        startInputListner(TotalLines);
+        startInputListner();
     }
-    public static void enterAlternateBuffer() throws Exception{
+    public  void enterAlternateBuffer() throws Exception{
         System.out.print("\033[?1049h");
         System.out.print("\033[?25l");
         Runtime.getRuntime()
@@ -38,15 +40,16 @@ public class Main {
         Runtime.getRuntime().exec(new String[]{"sh","-c","stty sane < /dev/tty"}).waitFor();
         System.out.flush();
     }
-    public static void startInputListner(terminalLineValue TotalLines){
+    public  void startInputListner(){
         Thread listner=new Thread(() ->{
             try{
-                Resources.start(TotalLines.lines-2);
+                Resources resources=new Resources();
+                resources.start();
                 // check constantly if user pressed the key . if pressed q that exit
                     System.out.print("Press q to exit:");
                     while(running.get()){
                         if(System.in.available()>0){
-                        //this checking was using too much memory or cpu something
+                            //this checking was using too much memory or cpu something
                             //that my laptop fan ran on max speed added sleep to cope
                             var answer=System.in.read();
                             if(answer=='q'){
