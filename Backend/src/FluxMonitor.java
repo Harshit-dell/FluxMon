@@ -1,24 +1,23 @@
-import javax.print.DocFlavor;
+import RandomObjects.terminalLineValue;
+import Resources.Resources;
+import Terminal.TerminalLines;
+
 import java.io.*;
-import java.nio.Buffer;
-import java.nio.file.*;
-import java.time.format.TextStyle;
-import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static java.util.Locale.filter;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
+public class FluxMonitor {
     public AtomicBoolean running =new AtomicBoolean(true);
 
     public static void main(String[] args) throws Exception{
-        new Main().start();
+        new FluxMonitor().start();
     }
 
     public void start() throws Exception {
-        cosmetics cosmetics1=new cosmetics();
+        TerminalLines cosmetics1=new TerminalLines();
         terminalLineValue TotalLines=cosmetics1.totalTerminalLine();
         if(!TotalLines.isTerminal){
             return;

@@ -1,11 +1,15 @@
+package Terminal;
+
+import RandomObjects.terminalLineValue;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class cosmetics {
-    cosmetics(){
+public class TerminalLines {
+    public TerminalLines(){
         totalTerminalLine();
     }
-    public  terminalLineValue totalTerminalLine() {
+    public terminalLineValue totalTerminalLine() {
 
         try {
             Process process = new ProcessBuilder("bash", "-c", "stty size < /dev/tty").start();

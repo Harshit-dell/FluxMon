@@ -5,10 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="584d1a84-79b2-447b-8b09-fb7c8a5ac88e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Backend/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Resources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/cosmetics.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/cosmetics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/formating.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/formating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/FluxMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/RandomObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/RandomObjects/terminalLineValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Resources/Resources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/cosmetics.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/TerminalLines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/formating.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Terminal/formating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/keyBindding.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/keyBindding.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/PACKAGE_NAME/keyBindding.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/PidValues.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/Resources.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/cosmetics.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/formating.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/terminalLineValue.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +36,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="3ARDjZYKHM2CrvOyM9cV8TGIWxG" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -59,7 +70,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Short" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="FluxMonitor" />
       <module name="Backend" />
       <method v="2">
         <option name="Make" enabled="true" />
