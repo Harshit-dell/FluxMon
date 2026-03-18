@@ -7,6 +7,16 @@ public class PidValues {
     private String content;
     private int pid;
 
+    public String getCmdline() {
+        return cmdline;
+    }
+
+    public void setCmdline(String cmdline) {
+        this.cmdline = cmdline;
+    }
+
+    private String cmdline;
+
     public PidValues(){}
 
     public int getMemory() {

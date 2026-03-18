@@ -1,5 +1,6 @@
 package Resources;
 
+import RandomObjects.HeaderValueObject;
 import RandomObjects.PidValues;
 import Terminal.formating;
 
@@ -12,9 +13,17 @@ import java.util.List;
 
 public class Resources {
     private final  HashMap<Integer,String> Users=new HashMap<>();
+    private HashMap<Integer,Long> pidCpuUsage=new HashMap<>();
+
+
     public   void start() throws Exception {
-        mapUser();
-         new formating().start(getPidsValues());
+            mapUser();
+            //loop implemntation
+
+            List<PidValues> pidValues=getPidsValues();
+            HeaderValueObject headerValues=new HeaderResources().getHeaderInfo();
+            new formating().start(pidValues,headerValues);
+
 
     }
     public  void  mapUser() throws  IOException{
@@ -24,6 +33,20 @@ public class Resources {
                    Users.put(temp,line[0]);
             });
     }
+
+    public  boolean isKThread(int pid) throws IOException {
+        Path path = Path.of("/proc/" + pid + "/status");
+        String content = Files.readString(path);
+        for (String line : content.split("\n")) {
+            String[] parts = line.split("\\s+");
+            if (parts[0].equals("VmRSS:")) {
+                return true;
+            }
+        }
+        return false;
+        //here optimization is possible but will leave it for later
+    }
+
     public List<PidValues> getPidsValues(){
         List<PidValues> pidsValuesList=new ArrayList<>();
         try{
@@ -35,7 +58,7 @@ public class Resources {
                     .forEach( pid ->{
                         try{
                            if(isKThread(pid) ){
-                               PidValues currentPidValue = new PidInformation().getValueMap(pid,Users);
+                               PidValues currentPidValue = new PidInformation().getPidInfo(pid,Users,pidCpuUsage);
                                //pid
                                currentPidValue.setPid(pid);
                                pidsValuesList.add(currentPidValue);
@@ -52,18 +75,7 @@ public class Resources {
         return pidsValuesList;
     }
 
-    public  boolean isKThread(int pid) throws IOException {
-        Path path = Path.of("/proc/" + pid + "/status");
-        String content = Files.readString(path);
-        for (String line : content.split("\n")) {
-            String[] parts = line.split("\\s+");
-            if (parts[0].equals("VmRSS:")) {
-                return true;
-            }
-        }
-        return false;
-        //here optimization is possible but will leave it for later
-    }
+
 
 
 }

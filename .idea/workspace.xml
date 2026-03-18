@@ -6,20 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="584d1a84-79b2-447b-8b09-fb7c8a5ac88e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/FluxMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/RandomObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/RandomObjects/terminalLineValue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Resources/Resources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/cosmetics.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/TerminalLines.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/formating.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Terminal/formating.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/keyBindding.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/keyBindding.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/PACKAGE_NAME/keyBindding.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/PidValues.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/Resources.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/cosmetics.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/formating.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/terminalLineValue.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/RandomObjects/PidValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/RandomObjects/PidValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/Resources/PidInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Resources/PidInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/Resources/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Resources/Resources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/Terminal/formating.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Terminal/formating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/RandomObjects/PidValues.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/RandomObjects/PidValues.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/Resources/PidInformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/Resources/PidInformation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/Resources/Resources.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/Resources/Resources.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Backend/Terminal/formating.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/Terminal/formating.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +49,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/harshit/Stopped_Projects/htop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/harshit/Working_Projects/Lexica&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
