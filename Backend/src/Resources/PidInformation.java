@@ -56,6 +56,7 @@ public class PidInformation{
 
         long total = utime + stime;
         return total;
+        
     }
 
     private String readCmdline(int pid) throws IOException {

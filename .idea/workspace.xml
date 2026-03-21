@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="584d1a84-79b2-447b-8b09-fb7c8a5ac88e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/RandomObjects/PidValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/RandomObjects/PidValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/Resources/PidInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Resources/PidInformation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/Resources/Resources.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Resources/Resources.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/src/Terminal/formating.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/Terminal/formating.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/RandomObjects/PidValues.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/RandomObjects/PidValues.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/Resources/PidInformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/Resources/PidInformation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/Resources/Resources.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/Resources/Resources.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Backend/Terminal/formating.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Backend/Terminal/formating.class" afterDir="false" />
-    </list>
+    <list default="true" id="584d1a84-79b2-447b-8b09-fb7c8a5ac88e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
