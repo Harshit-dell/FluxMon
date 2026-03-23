@@ -14,17 +14,13 @@ import java.util.List;
 public class Resources {
     private final  HashMap<Integer,String> Users=new HashMap<>();
     private HashMap<Integer,Long> pidCpuUsage=new HashMap<>();
-
-
     public   void start() throws Exception {
             mapUser();
             //loop implemntation
-
-            List<PidValues> pidValues=getPidsValues();
+            long prevCpuUsage=0;
+            List<PidValues> pidValues=getPidsValues(prevCpuUsage);
             HeaderValueObject headerValues=new HeaderResources().getHeaderInfo();
             new formating().start(pidValues,headerValues);
-
-
     }
     public  void  mapUser() throws  IOException{
             Files.readAllLines(Path.of("/etc/passwd")).forEach(uid ->{
@@ -33,7 +29,6 @@ public class Resources {
                    Users.put(temp,line[0]);
             });
     }
-
     public  boolean isKThread(int pid) throws IOException {
         Path path = Path.of("/proc/" + pid + "/status");
         String content = Files.readString(path);
@@ -47,7 +42,7 @@ public class Resources {
         //here optimization is possible but will leave it for later
     }
 
-    public List<PidValues> getPidsValues(){
+    public List<PidValues> getPidsValues(long prevCpuUsage){
         List<PidValues> pidsValuesList=new ArrayList<>();
         try{
                 Files.list(Path.of("/proc"))
@@ -58,7 +53,7 @@ public class Resources {
                     .forEach( pid ->{
                         try{
                            if(isKThread(pid) ){
-                               PidValues currentPidValue = new PidInformation().getPidInfo(pid,Users,pidCpuUsage);
+                               PidValues currentPidValue = new PidInformation().getPidInfo(pid,Users,pidCpuUsage,prevCpuUsage);
                                //pid
                                currentPidValue.setPid(pid);
                                pidsValuesList.add(currentPidValue);

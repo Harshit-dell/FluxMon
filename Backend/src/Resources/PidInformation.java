@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class PidInformation{
 
-    public PidValues getPidInfo(int pid, HashMap<Integer, String> users,HashMap<Integer,Long> pidCpuUsage ) {
+    public PidValues getPidInfo(int pid, HashMap<Integer, String> users,HashMap<Integer,Long> pidCpuUsage,long prevCpuUsage ) {
 
         PidValues process = new PidValues();
 
@@ -18,7 +18,7 @@ public class PidInformation{
             process.setContent(readComm(pid));
             process.setCmdline(readCmdline(pid));
             readStatus(pid, users, process);
-            //readCpuUsage(pid,pidCpuUsage);
+            process.setCpuUsage(getCpu(pidCpuUsage,prevCpuUsage,pid));
 
         } catch (Exception e) {
             System.out.println("Failed to read process " + pid + " : " + e.getMessage());
@@ -45,6 +45,29 @@ public class PidInformation{
         }
     }
 
+    private long getCpu(HashMap<Integer,Long> map,long prevTotalCpu,int pid){
+        try{
+            if(map.containsKey(pid)){
+                map.put(pid,getProcessCpu(pid));
+                prevTotalCpu=new HeaderResources().totalCpu();
+            }
+            else{
+                long currTotalCpu=new HeaderResources().totalCpu();
+                long prec_proc=map.get(pid);
+                long cur_porcc=getProcessCpu(pid);
+                long cpu=(cur_porcc-prec_proc)/(currTotalCpu-prevTotalCpu)*100;
+                prevTotalCpu=currTotalCpu;
+                map.put(pid,cur_porcc);
+            return cpu;
+
+            }
+        }
+        catch(Exception e){
+            System.out.println("error in the cpuUsage");
+        }
+        return 0;
+    }
+
     private long getProcessCpu(int pid) throws IOException {
         String stat = Files.readString(Path.of("/proc/" + pid + "/stat"));
 
@@ -55,8 +78,8 @@ public class PidInformation{
         long stime = Long.parseLong(parts[12]);
 
         long total = utime + stime;
+        //time spent by proceess + time spent by os for that process
         return total;
-        
     }
 
     private String readCmdline(int pid) throws IOException {
@@ -67,6 +90,4 @@ public class PidInformation{
     private String readComm(int pid) throws IOException {
         return Files.readString(Path.of("/proc/" + pid + "/comm")).trim();
     }
-
-
 }

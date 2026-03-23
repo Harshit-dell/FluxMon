@@ -6,6 +6,15 @@ public class PidValues {
     private String user;
     private String content;
     private int pid;
+    private long cpuUsage;
+
+    public long getCpuUsage() {
+        return cpuUsage;
+    }
+
+    public void setCpuUsage(long cpuUsage) {
+        this.cpuUsage = cpuUsage;
+    }
 
     public String getCmdline() {
         return cmdline;

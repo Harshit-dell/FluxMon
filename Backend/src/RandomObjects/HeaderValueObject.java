@@ -2,6 +2,15 @@ package RandomObjects;
 
 public class HeaderValueObject {
     private String uptime;
+    private long cpu;
+
+    public long getCpu() {
+        return cpu;
+    }
+
+    public void setCpu(long cpu) {
+        this.cpu = cpu;
+    }
 
 
 
