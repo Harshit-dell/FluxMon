@@ -59,11 +59,10 @@ public class PidInformation{
                 prevTotalCpu=currTotalCpu;
                 map.put(pid,cur_porcc);
             return cpu;
-
             }
         }
         catch(Exception e){
-            System.out.println("error in the cpuUsage");
+            System.out.println("error in the cpuUsage"+e.getMessage());
         }
         return 0;
     }
