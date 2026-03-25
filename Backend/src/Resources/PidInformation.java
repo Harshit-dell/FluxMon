@@ -45,17 +45,17 @@ public class PidInformation{
         }
     }
 
-    private long getCpu(HashMap<Integer,Long> map,long prevTotalCpu,int pid){
+    private double getCpu(HashMap<Integer,Long> map,long prevTotalCpu,int pid){
         try{
-            if(map.containsKey(pid)){
+            if(!map.containsKey(pid)){
                 map.put(pid,getProcessCpu(pid));
                 prevTotalCpu=new HeaderResources().totalCpu();
             }
             else{
                 long currTotalCpu=new HeaderResources().totalCpu();
-                long prec_proc=map.get(pid);
+                long prev_proc=map.get(pid);
                 long cur_porcc=getProcessCpu(pid);
-                long cpu=(cur_porcc-prec_proc)/(currTotalCpu-prevTotalCpu)*100;
+                double cpu=(double) (cur_porcc-prev_proc)/(currTotalCpu-prevTotalCpu)*100;
                 prevTotalCpu=currTotalCpu;
                 map.put(pid,cur_porcc);
             return cpu;

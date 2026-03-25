@@ -12,23 +12,21 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Resources {
-    private final  HashMap<Integer,String> Users=new HashMap<>();
+    private  HashMap<Integer,String> Users;
+    public Resources(HashMap<Integer, String> Users){
+        this.Users=Users;
+    }
     private HashMap<Integer,Long> pidCpuUsage=new HashMap<>();
+
     public   void start() throws Exception {
-            mapUser();
+
             //loop implemntation
             long prevCpuUsage=0;
-            List<PidValues> pidValues=getPidsValues(prevCpuUsage);
-            HeaderValueObject headerValues=new HeaderResources().getHeaderInfo();
-            new formating().start(pidValues,headerValues);
+                List<PidValues> pidValues=getPidsValues(prevCpuUsage);
+                HeaderValueObject headerValues=new HeaderResources().getHeaderInfo();
+                new formating().start(pidValues,headerValues);
     }
-    public  void  mapUser() throws  IOException{
-            Files.readAllLines(Path.of("/etc/passwd")).forEach(uid ->{
-                String[] line=uid.split(":");
-                int temp=Integer.parseInt(line[3]);
-                   Users.put(temp,line[0]);
-            });
-    }
+
     public  boolean isKThread(int pid) throws IOException {
         Path path = Path.of("/proc/" + pid + "/status");
         String content = Files.readString(path);

@@ -6,13 +6,13 @@ public class PidValues {
     private String user;
     private String content;
     private int pid;
-    private long cpuUsage;
+    private double cpuUsage;
 
-    public long getCpuUsage() {
+    public double getCpuUsage() {
         return cpuUsage;
     }
 
-    public void setCpuUsage(long cpuUsage) {
+    public void setCpuUsage(double cpuUsage) {
         this.cpuUsage = cpuUsage;
     }
 
