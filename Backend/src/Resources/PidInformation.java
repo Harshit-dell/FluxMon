@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class PidInformation{
 
-    public PidValues getPidInfo(int pid, HashMap<Integer, String> users,HashMap<Integer,Long> pidCpuUsage,long prevCpuUsage ) {
+    public PidValues getPidInfo(int pid, HashMap<Integer, String> users,HashMap<Integer,Long> pidCpuUsage,long currCpuUsage,long prevCpuUsage ) {
 
         PidValues process = new PidValues();
 
@@ -18,7 +18,7 @@ public class PidInformation{
             process.setContent(readComm(pid));
             process.setCmdline(readCmdline(pid));
             readStatus(pid, users, process);
-            process.setCpuUsage(getCpu(pidCpuUsage,prevCpuUsage,pid));
+            process.setCpuUsage(getCpu(pidCpuUsage,currCpuUsage,prevCpuUsage,pid));
 
         } catch (Exception e) {
             System.out.println("Failed to read process " + pid + " : " + e.getMessage());
@@ -45,26 +45,38 @@ public class PidInformation{
         }
     }
 
-    private double getCpu(HashMap<Integer,Long> map,long prevTotalCpu,int pid){
-        try{
-            if(!map.containsKey(pid)){
-                map.put(pid,getProcessCpu(pid));
-                prevTotalCpu=new HeaderResources().totalCpu();
+    private double getCpu(HashMap<Integer, Long> map,
+                          long currTotalCpu,
+                          long prevTotalCpu,
+                          int pid) {
+        try {
+
+            long currProc = getProcessCpu(pid);
+
+            if (!map.containsKey(pid)) {
+                map.put(pid, currProc);
+                return 0;
             }
-            else{
-                long currTotalCpu=new HeaderResources().totalCpu();
-                long prev_proc=map.get(pid);
-                long cur_porcc=getProcessCpu(pid);
-                double cpu=(double) (cur_porcc-prev_proc)/(currTotalCpu-prevTotalCpu)*100;
-                prevTotalCpu=currTotalCpu;
-                map.put(pid,cur_porcc);
+
+            long prevProc = map.get(pid);
+
+            long totalDelta = currTotalCpu - prevTotalCpu;
+            long procDelta = currProc - prevProc;
+
+            if (totalDelta <= 0 || procDelta < 0) {
+                map.put(pid, currProc);
+                return 0;
+            }
+
+            double cpu = (double) procDelta / totalDelta * 100;
+
+            map.put(pid, currProc);
             return cpu;
-            }
+
+        } catch (Exception e) {
+            map.remove(pid); // cleanup
+            return 0;
         }
-        catch(Exception e){
-            System.out.println("error in the cpuUsage"+e.getMessage());
-        }
-        return 0;
     }
 
     private long getProcessCpu(int pid) throws IOException {

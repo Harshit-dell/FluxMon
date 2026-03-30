@@ -17,14 +17,26 @@ public class Resources {
         this.Users=Users;
     }
     private HashMap<Integer,Long> pidCpuUsage=new HashMap<>();
+    private long prevCpuUsage = -1;
 
-    public   void start() throws Exception {
+    public void start() throws Exception {
 
-            //loop implemntation
-            long prevCpuUsage=0;
-                List<PidValues> pidValues=getPidsValues(prevCpuUsage);
-                HeaderValueObject headerValues=new HeaderResources().getHeaderInfo();
-                new formating().start(pidValues,headerValues);
+        long currCpuUsage = new HeaderResources().totalCpu();
+
+        if (prevCpuUsage == -1) {
+            prevCpuUsage = currCpuUsage;
+            return; // first cycle → no CPU yet
+        }
+
+        List<PidValues> pidValues =
+                getPidsValues(currCpuUsage, prevCpuUsage);
+
+        HeaderValueObject headerValues =
+                new HeaderResources().getHeaderInfo();
+
+        new formating().start(pidValues, headerValues);
+
+        prevCpuUsage = currCpuUsage;
     }
 
     public  boolean isKThread(int pid) throws IOException {
@@ -40,7 +52,7 @@ public class Resources {
         //here optimization is possible but will leave it for later
     }
 
-    public List<PidValues> getPidsValues(long prevCpuUsage){
+    public List<PidValues> getPidsValues(long currCpuUsage,long prevCpuUsage){
         List<PidValues> pidsValuesList=new ArrayList<>();
         try{
                 Files.list(Path.of("/proc"))
@@ -51,7 +63,7 @@ public class Resources {
                     .forEach( pid ->{
                         try{
                            if(isKThread(pid) ){
-                               PidValues currentPidValue = new PidInformation().getPidInfo(pid,Users,pidCpuUsage,prevCpuUsage);
+                               PidValues currentPidValue = new PidInformation().getPidInfo(pid,Users,pidCpuUsage,currCpuUsage,prevCpuUsage);
                                //pid
                                currentPidValue.setPid(pid);
                                pidsValuesList.add(currentPidValue);

@@ -39,6 +39,7 @@ public class FluxMonitor {
     }
     public  void enterAlternateBuffer() throws Exception{
         System.out.print("\033[?1049h");
+        
         System.out.print("\033[?25l");
         Runtime.getRuntime()
                 .exec(new String[]{"sh","-c","stty -icanon -echo < /dev/tty"})
@@ -86,10 +87,11 @@ public class FluxMonitor {
         listner.start();
             Resources resources=new Resources(Users);
             while(running.get()){
-                System.out.print("\033[H");  // move cursor to top ONLY
+                System.out.print("\033[2J\033[H");   // move cursor to top ONLY
                 System.out.flush();
                 resources.start();
-                Thread.sleep(1000);
+                Thread.sleep(2000);
+                //TODO i can directly connect formatting form here to improve project design and add scroll
 
 
             }
