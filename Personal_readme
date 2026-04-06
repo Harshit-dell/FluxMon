@@ -17,3 +17,50 @@ Version2
         3.working on the raw terminal
         4.Adding more information in the screen and beautifing it(tommorow)
 
+    Structure expected
+    FluxMon/
+    │
+    ├── core/                          ← Your existing Java TUI
+    │   ├── src/
+    │   │   ├── FluxMonitor.java
+    │   │   ├── Resources/
+    │   │   │   ├── Resources.java
+    │   │   │   ├── HeaderResources.java
+    │   │   │   └── PidInformation.java
+    │   │   ├── Terminal/
+    │   │   │   ├── formating.java
+    │   │   │   └── TerminalLines.java
+    │   │   └── RandomObjects/
+    │   │       ├── PidValues.java
+    │   │       ├── HeaderValueObject.java
+    │   │       └── terminalLineValue.java
+    │   └── README.md
+    │
+    ├── api/                           ← NEW — Spring Boot REST API
+    │   ├── src/main/java/com/fluxmon/
+    │   │   ├── FluxMonApiApplication.java
+    │   │   ├── controller/
+    │   │   │   ├── ProcessController.java
+    │   │   │   └── SystemController.java
+    │   │   ├── service/
+    │   │   │   ├── ProcessService.java
+    │   │   │   └── SystemService.java
+    │   │   ├── model/
+    │   │   │   ├── ProcessDTO.java
+    │   │   │   └── SystemStatsDTO.java
+    │   │   └── repository/
+    │   │       └── CpuHistoryRepository.java
+    │   ├── src/main/resources/
+    │   │   └── application.properties
+    │   └── pom.xml
+    │
+    ├── dashboard/                     ← NEW — Frontend
+    │   ├── index.html
+    │   ├── css/
+    │   │   └── style.css
+    │   └── js/
+    │       ├── processes.js           ← fetches /api/processes
+    │       ├── charts.js              ← CPU/memory graphs
+    │       └── main.js
+    │
+    └── README.md                      ← top level explaining all three

@@ -1,5 +1,5 @@
 import RandomObjects.terminalLineValue;
-import Resources.Resources;
+import Resources.Resource;
 import Terminal.TerminalLines;
 
 import java.io.*;
@@ -85,14 +85,13 @@ public class FluxMonitor {
 
         });
         listner.start();
-            Resources resources=new Resources(Users);
+            Resource resources=new Resource(Users);
             while(running.get()){
                 System.out.print("\033[2J\033[H");   // move cursor to top ONLY
                 System.out.flush();
                 resources.start();
                 Thread.sleep(2000);
                 //TODO i can directly connect formatting form here to improve project design and add scroll
-
 
             }
 

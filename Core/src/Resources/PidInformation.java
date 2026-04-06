@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class PidInformation{
 
-    public PidValues getPidInfo(int pid, HashMap<Integer, String> users,HashMap<Integer,Long> pidCpuUsage,long currCpuUsage,long prevCpuUsage ) {
+   public PidValues getPidInfo(int pid, HashMap<Integer, String> users,HashMap<Integer,Long> pidCpuUsage,long currCpuUsage,long prevCpuUsage ) {
 
         PidValues process = new PidValues();
 

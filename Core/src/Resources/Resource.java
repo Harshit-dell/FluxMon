@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Resources {
+public class Resource {
     private  HashMap<Integer,String> Users;
-    public Resources(HashMap<Integer, String> Users){
+    public Resource(HashMap<Integer, String> Users){
         this.Users=Users;
     }
     private HashMap<Integer,Long> pidCpuUsage=new HashMap<>();
