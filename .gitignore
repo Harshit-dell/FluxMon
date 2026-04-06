@@ -5,14 +5,12 @@
 # Maven
 target/
 
-out/*
-!out/artifacts/
-!out/artifacts/FluxMon_jar/
-!out/artifacts/FluxMon_jar/FluxMon.jar
+
+out/production/
+
 
 # Java
 *.class
-*.jar
 
 # OS
 .DS_Store
