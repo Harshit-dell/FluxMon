@@ -1,8 +1,0 @@
-# Compiled output
-out/
-*.class
-*.jar
-
-# IntelliJ project files
-.idea/
-*.iml

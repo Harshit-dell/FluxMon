@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="FluxMon:jar2">
-    <output-path>$PROJECT_DIR$/out/artifacts/FluxMon_jar2</output-path>
-    <root id="archive" name="FluxMon.jar">
-      <element id="module-output" name="Backend" />
-    </root>
-  </artifact>
-</component>
